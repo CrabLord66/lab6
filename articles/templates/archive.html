@@ -20,8 +20,45 @@
 
         <img
             src="{% static 'articles/logo.svg' %}"
-            alt="Логотип блога"
+            alt="Django Public Blog"
         >
+
+        <div class="site-nav">
+
+            {% if user.is_authenticated %}
+
+                <span class="current-user">
+                    {{ user.username }}
+                </span>
+
+                <a href="{% url 'create_post' %}">
+                    Новая статья
+                </a>
+
+                <form
+                    method="POST"
+                    action="{% url 'user_logout' %}"
+                >
+                    {% csrf_token %}
+
+                    <button type="submit" class="logout-button">
+                        Выйти
+                    </button>
+                </form>
+
+            {% else %}
+
+                <a href="{% url 'register' %}">
+                    Регистрация
+                </a>
+
+                <a href="{% url 'user_login' %}">
+                    Вход
+                </a>
+
+            {% endif %}
+
+        </div>
 
     </div>
 

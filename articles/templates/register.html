@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Django Public Blog - Регистрация</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'articles/css/article.css' %}"
+    >
+</head>
+
+<body class="auth-page">
+
+    <div class="header">
+
+        <img
+            src="{% static 'articles/logo.svg' %}"
+            alt="Django Public Blog"
+        >
+
+        <div class="site-nav">
+            <a href="{% url 'archive' %}">Все записи</a>
+            <a href="{% url 'user_login' %}">Вход</a>
+        </div>
+
+    </div>
+
+    <div class="content">
+
+        <h1>Регистрация</h1>
+
+        <p class="form-description">
+            Создайте аккаунт для публикации статей.
+        </p>
+
+        <form method="POST" class="form-panel" novalidate>
+
+            {% csrf_token %}
+
+            <label for="username">
+                Логин:
+            </label>
+
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Введите логин"
+                maxlength="150"
+                autocomplete="username"
+                value="{{ form.username }}"
+            >
+
+            <label for="email">
+                Электронная почта:
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Введите email"
+                autocomplete="email"
+                value="{{ form.email }}"
+            >
+
+            <label for="password">
+                Пароль:
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Введите пароль"
+                autocomplete="new-password"
+            >
+
+            <button type="submit" class="submit-button">
+                Зарегистрироваться
+            </button>
+
+        </form>
+
+        {% if form.errors %}
+
+            <div class="form-errors">
+                {{ form.errors }}
+            </div>
+
+        {% endif %}
+
+        <p class="form-footer">
+            Уже есть аккаунт?
+            <a href="{% url 'user_login' %}">Войти</a>
+        </p>
+
+    </div>
+
+</body>
+</html>

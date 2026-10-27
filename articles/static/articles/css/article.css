@@ -1,4 +1,4 @@
-/* Общие настройки страниц */
+/* Общие настройки сайта */
 
 body {
     background: #1abc9c;
@@ -15,7 +15,7 @@ body {
     width: 960px;
     max-width: calc(100% - 40px);
 
-    margin: 30px auto 40px;
+    margin: 30px auto 50px;
     position: relative;
 }
 
@@ -31,16 +31,54 @@ body {
     margin-right: auto;
 }
 
-/* Ссылка "Все записи" */
+/* Навигация */
 
-.all-posts {
+.site-nav {
     position: absolute;
+    top: 25px;
     right: 0;
-    top: 30px;
 
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    font-size: 14px;
+}
+
+.site-nav a {
     color: #ffffff;
+    text-decoration: underline;
+}
+
+.site-nav a:hover {
+    color: #e0f7f3;
+}
+
+.current-user {
+    font-weight: bold;
+}
+
+/* Кнопка выхода */
+
+.site-nav form {
+    margin: 0;
+}
+
+.logout-button {
+    border: none;
+    background: transparent;
+    color: #ffffff;
+
+    font-family: inherit;
     font-size: 14px;
     text-decoration: underline;
+
+    padding: 0;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    color: #e0f7f3;
 }
 
 /* Архив статей */
@@ -53,7 +91,11 @@ body {
     margin-right: auto;
 }
 
-/* Отдельная статья */
+.one-post {
+    margin-bottom: 45px;
+}
+
+/* Страница отдельной статьи */
 
 .article-content {
     width: 960px;
@@ -61,12 +103,6 @@ body {
 
     margin-left: auto;
     margin-right: auto;
-}
-
-/* Блок одной статьи */
-
-.one-post {
-    margin-bottom: 45px;
 }
 
 /* Названия статей */
@@ -79,8 +115,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Ссылки в названиях статей */
-
 .post-title a {
     color: #ffffff;
     text-decoration: underline;
@@ -90,7 +124,7 @@ body {
     color: #e0f7f3;
 }
 
-/* Информация об авторе и дате */
+/* Автор и дата */
 
 .article-info {
     font-size: 14px;
@@ -125,8 +159,6 @@ body {
     margin-bottom: 16px;
 }
 
-/* Стили страницы отдельной статьи */
-
 .article .post-title {
     font-size: 30px;
     margin-bottom: 25px;
@@ -137,23 +169,29 @@ body {
     line-height: 1.7;
 }
 
-/* ------------------------------- */
-/* Стили формы создания статьи     */
-/* ------------------------------- */
+/* Формы создания статьи, регистрации и входа */
 
-.create-post .content {
+.create-post .content,
+.auth-page .content {
     width: 700px;
     max-width: calc(100% - 40px);
 
     margin: 0 auto 60px;
 }
 
-.create-post h1 {
+.content h1 {
     font-size: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
-.create-post form {
+.form-description {
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+/* Расположение элементов формы */
+
+.form-panel {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -161,49 +199,48 @@ body {
 
 /* Подписи полей */
 
-.create-post label {
+.form-panel label {
     font-size: 16px;
     font-weight: bold;
 }
 
-/* Поле названия статьи */
+/* Текстовые поля */
 
-.create-post input[type="text"] {
+.form-panel input[type="text"],
+.form-panel input[type="email"],
+.form-panel input[type="password"],
+.form-panel textarea {
     width: 100%;
     box-sizing: border-box;
 
     padding: 12px;
+
     font-family: Tahoma, Arial, sans-serif;
     font-size: 16px;
 
     border: 1px solid #cccccc;
     border-radius: 5px;
+
     background: #ffffff;
     color: #333333;
 }
 
-/* Поле текста статьи */
-
-.create-post textarea {
-    width: 100%;
-    box-sizing: border-box;
-
-    padding: 12px;
-    font-family: Tahoma, Arial, sans-serif;
-    font-size: 16px;
-
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-    background: #ffffff;
-    color: #333333;
-
+.form-panel textarea {
     resize: vertical;
 }
 
-/* Кнопка сохранения */
+/* Выделение активного поля */
 
-.create-post input[type="submit"] {
-    width: 220px;
+.form-panel input:focus,
+.form-panel textarea:focus {
+    outline: 2px solid #176156;
+    border-color: #176156;
+}
+
+/* Кнопки отправки форм */
+
+.submit-button {
+    width: 230px;
     padding: 12px 20px;
 
     border: none;
@@ -212,17 +249,18 @@ body {
     background: #23796e;
     color: #ffffff;
 
+    font-family: inherit;
     font-size: 16px;
     font-weight: bold;
 
     cursor: pointer;
 }
 
-.create-post input[type="submit"]:hover {
+.submit-button:hover {
     background: #176156;
 }
 
-/* Сообщение об ошибке */
+/* Сообщения об ошибках */
 
 .form-errors {
     margin-top: 20px;
@@ -233,21 +271,36 @@ body {
 
     border-radius: 5px;
     font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Ссылки под формами */
+
+.form-footer {
+    margin-top: 25px;
+    font-size: 15px;
+}
+
+.form-footer a {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 /* Адаптация для небольших экранов */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
     .header {
-        margin-bottom: 30px;
+        margin-bottom: 35px;
     }
 
-    .all-posts {
+    .site-nav {
         position: static;
-        display: block;
 
-        text-align: center;
+        justify-content: center;
+        flex-wrap: wrap;
+
         margin-top: 20px;
     }
 
@@ -269,11 +322,11 @@ body {
         margin-top: 8px;
     }
 
-    .create-post h1 {
+    .content h1 {
         font-size: 25px;
     }
 
-    .create-post input[type="submit"] {
+    .submit-button {
         width: 100%;
     }
 }

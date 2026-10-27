@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Django Public Blog - создать статью</title>
+    <title>Django Public Blog - Новая статья</title>
 
     <link
         rel="stylesheet"
@@ -20,12 +20,27 @@
 
         <img
             src="{% static 'articles/logo.svg' %}"
-            alt="Логотип блога"
+            alt="Django Public Blog"
         >
 
-        <a class="all-posts" href="{% url 'archive' %}">
-            Все записи
-        </a>
+        <div class="site-nav">
+
+            <a href="{% url 'archive' %}">
+                Все записи
+            </a>
+
+            <form
+                method="POST"
+                action="{% url 'user_logout' %}"
+            >
+                {% csrf_token %}
+
+                <button type="submit" class="logout-button">
+                    Выйти
+                </button>
+            </form>
+
+        </div>
 
     </div>
 
@@ -33,7 +48,7 @@
 
         <h1>Написать статью</h1>
 
-        <form method="POST" novalidate>
+        <form method="POST" class="form-panel" novalidate>
 
             {% csrf_token %}
 
@@ -61,10 +76,9 @@
                 placeholder="Введите текст статьи"
             >{{ form.text }}</textarea>
 
-            <input
-                type="submit"
-                value="Сохранить статью"
-            >
+            <button type="submit" class="submit-button">
+                Сохранить статью
+            </button>
 
         </form>
 
